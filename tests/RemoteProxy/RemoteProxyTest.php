@@ -22,7 +22,7 @@ class RemoteProxyTest extends PHPUnit\Framework\TestCase
     }
 
     /** @test */
-    public function remote_http_404_request_resolved_into_exception()
+    public function remote_http_404_not_found_request_resolved_into_exception()
     {
         $this->expectException(ReportNotFoundException::class);
         new RemoteReportSubjectProxy($this->test_server . '/thisTestDoesntExist.php');

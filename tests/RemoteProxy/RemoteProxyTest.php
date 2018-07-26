@@ -13,14 +13,6 @@ class RemoteProxyTest extends PHPUnit\Framework\TestCase
         $this->test_server = 'http://' . getenv('TEST_HTTP_HOST');
     }
 
-    public static function setUpBeforeClass()
-    {
-        $pid = exec('php -S ' . getenv('TEST_HTTP_HOST') . ' -t ./tests/server > /dev/null 2>&1 & echo $!');
-        register_shutdown_function(function () use ($pid) {
-            exec('kill ' . $pid);
-        });
-    }
-
     /** @test */
     public function remote_http_404_not_found_request_resolved_into_exception()
     {

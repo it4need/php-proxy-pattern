@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: janschloesser
- * Date: 27.07.18
- * Time: 00:15
- */
 
 namespace ProxyPatterns\CacheProxy;
 

@@ -2,7 +2,7 @@
 
 namespace ProxyPatterns\RemoteProxy;
 
-interface IReportSubject
+interface IReport
 {
     public function generateReport();
 

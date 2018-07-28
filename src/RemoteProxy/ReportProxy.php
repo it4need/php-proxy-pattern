@@ -5,7 +5,7 @@ namespace ProxyPatterns\RemoteProxy;
 use ProxyPatterns\RemoteProxy\Exceptions\ReportNotFoundException;
 use Zttp\Zttp;
 
-class RemoteReportSubjectProxy implements IReportSubject
+class ReportProxy implements IReport
 {
     private $report;
 
@@ -21,7 +21,7 @@ class RemoteReportSubjectProxy implements IReportSubject
             throw new ReportNotFoundException();
         }
         $report = json_decode($json_report->getBody());
-        $this->report = new RealReportSubject($report->id, $report->owner, $report->score);
+        $this->report = new ReportSubject($report->id, $report->owner, $report->score);
     }
 
     public function generateReport()

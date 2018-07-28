@@ -16,7 +16,7 @@ class ImageProxy implements IImage
     public function getSize()
     {
         if ($this->subject == null) {
-            $this->subject = new RealImageSubject($this->image);
+            $this->subject = new ImageSubject($this->image);
         }
 
         return $this->subject->getSize();

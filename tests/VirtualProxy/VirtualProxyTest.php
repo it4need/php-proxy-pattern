@@ -8,7 +8,7 @@ class VirtualProxyTest extends PHPUnit\Framework\TestCase
     /** @test */
     public function image_subject_get_correct_image_width_and_height()
     {
-        $image = new ProxyPatterns\VirtualProxy\RealImageSubject(self::TEST_IMAGE); // image: ≈ 4.8MB
+        $image = new ProxyPatterns\VirtualProxy\ImageSubject(self::TEST_IMAGE); // image: ≈ 4.8MB
         $this->assertEquals($this->get_test_image_size(), $image->getSize());
     }
 
@@ -23,7 +23,7 @@ class VirtualProxyTest extends PHPUnit\Framework\TestCase
     public function image_subject_consumes_memory_right_directly_after_creating_one_instance()
     {
         $first_memory = $this->memory_usage_in_mb();
-        $image = new ProxyPatterns\VirtualProxy\RealImageSubject(self::TEST_IMAGE); // image: ≈ 4.8MB
+        $image = new ProxyPatterns\VirtualProxy\ImageSubject(self::TEST_IMAGE); // image: ≈ 4.8MB
         $second_memory = $this->memory_usage_in_mb();
         $memory_usage_of_image = $second_memory - $first_memory;
 
@@ -47,9 +47,9 @@ class VirtualProxyTest extends PHPUnit\Framework\TestCase
     public function image_subject_consumes_two_times_memory_after_creating_two_instances_of_the_image()
     {
         $first_memory = $this->memory_usage_in_mb();
-        $image = new ProxyPatterns\VirtualProxy\RealImageSubject(__DIR__ . '/../../assets/images/big_image.jpg'); // image: ≈ 4.8MB, after: first_memory+image
+        $image = new ProxyPatterns\VirtualProxy\ImageSubject(__DIR__ . '/../../assets/images/big_image.jpg'); // image: ≈ 4.8MB, after: first_memory+image
         $second_memory = $this->memory_usage_in_mb();
-        $image2 = new ProxyPatterns\VirtualProxy\RealImageSubject(__DIR__ . '/../../assets/images/big_image.jpg'); // image: ≈ 4.8MB, after: second_memory+image
+        $image2 = new ProxyPatterns\VirtualProxy\ImageSubject(__DIR__ . '/../../assets/images/big_image.jpg'); // image: ≈ 4.8MB, after: second_memory+image
         $third_memory = $this->memory_usage_in_mb();
 
         $memory_usage_of_image = $second_memory - $first_memory;

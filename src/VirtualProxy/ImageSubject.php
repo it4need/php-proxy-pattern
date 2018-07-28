@@ -2,7 +2,7 @@
 
 namespace ProxyPatterns\VirtualProxy;
 
-class RealImageSubject implements IImage
+class ImageSubject implements IImage
 {
     protected $img_data;
 

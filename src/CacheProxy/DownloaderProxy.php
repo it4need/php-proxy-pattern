@@ -2,7 +2,7 @@
 
 namespace ProxyPatterns\CacheProxy;
 
-class CacheDownloaderProxy implements IDownloader
+class DownloaderProxy implements IDownloader
 {
     private $cache = [];
     private $downloader = null;
@@ -10,7 +10,7 @@ class CacheDownloaderProxy implements IDownloader
     public function download($url)
     {
         if ($this->downloader == null) {
-            $this->downloader = new RealDownloaderSubject();
+            $this->downloader = new DownloaderSubject();
         }
 
         if (!empty($this->cache[$url])) {

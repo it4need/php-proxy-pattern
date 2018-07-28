@@ -2,7 +2,7 @@
 
 namespace ProxyPatterns\RemoteProxy;
 
-class RealReportSubject implements IReportSubject
+class ReportSubject implements IReport
 {
     private $owner;
     private $id;

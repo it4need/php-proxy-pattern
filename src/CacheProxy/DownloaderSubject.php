@@ -5,7 +5,7 @@ namespace ProxyPatterns\CacheProxy;
 use ProxyPatterns\CacheProxy\Exceptions\FileNotFoundException;
 use Zttp\Zttp;
 
-class RealDownloaderSubject implements IDownloader
+class DownloaderSubject implements IDownloader
 {
     public function download($url)
     {

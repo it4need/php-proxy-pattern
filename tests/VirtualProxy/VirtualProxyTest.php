@@ -47,9 +47,9 @@ class VirtualProxyTest extends PHPUnit\Framework\TestCase
     public function image_subject_consumes_two_times_memory_after_creating_two_instances_of_the_image()
     {
         $first_memory = $this->memory_usage_in_mb();
-        $image = new ProxyPatterns\VirtualProxy\ImageSubject(__DIR__ . '/../../assets/images/big_image.jpg'); // image: ≈ 4.8MB, after: first_memory+image
+        $image = new ProxyPatterns\VirtualProxy\ImageSubject(self::TEST_IMAGE); // image: ≈ 4.8MB, after: first_memory+image
         $second_memory = $this->memory_usage_in_mb();
-        $image2 = new ProxyPatterns\VirtualProxy\ImageSubject(__DIR__ . '/../../assets/images/big_image.jpg'); // image: ≈ 4.8MB, after: second_memory+image
+        $image2 = new ProxyPatterns\VirtualProxy\ImageSubject(self::TEST_IMAGE); // image: ≈ 4.8MB, after: second_memory+image
         $third_memory = $this->memory_usage_in_mb();
 
         $memory_usage_of_image = $second_memory - $first_memory;

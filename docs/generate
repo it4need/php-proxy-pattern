@@ -1,11 +1,13 @@
 #!/bin/bash
 
+CURRENT_PWD=$(pwd)
 cd content
 echo "1. Delete maybe already exists combined.md"
 rm -f combined.md || true
 echo "1. Combine everything into combined.md"
 awk 'FNR==1{print ""}1' *.md > combined.md
 echo "2. Running pandoc on combined.md"
+export TEXINPUTS=::$CURRENT_PWD/src
 pandoc -s -o ../output/proxy-pattern.pdf --from markdown --template ../src/template --listings combined.md --pdf-engine=xelatex
 echo "3. Adding pdf to git"
 cd ..

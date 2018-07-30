@@ -12,5 +12,13 @@ pandoc -s -o ../output/proxy-pattern.pdf --from markdown --template ../src/templ
 echo "3. Adding pdf to git"
 cd ..
 git add output/proxy-pattern.pdf
-echo "3. Clean everything"
+echo "4. Running pandoc on combined.md for creating html docs"
+pandoc  --no-highlight \
+        --lua-filter="$CURRENT_PWD"/src/task-list_architect.lua \
+        --from       markdown_github+smart+yaml_metadata_block+auto_identifiers \
+        --to         html5 \
+        --template   "$CURRENT_PWD"/src/architect.template \
+        --output     "$CURRENT_PWD"/output/index.html \
+        "$CURRENT_PWD"/content/combined.md "$CURRENT_PWD"/src/configuration_architect.yaml
+echo "5. Clean everything"
 rm ./content/combined.md

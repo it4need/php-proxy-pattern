@@ -47,6 +47,9 @@
 % Include fontawesome5
 \usepackage{fontawesome5}
 
+% Add ability for last page
+\usepackage{lastpage}
+
 $if(beamer)$
 \setbeamertemplate{caption}[numbered]
 \setbeamertemplate{caption label separator}{: }

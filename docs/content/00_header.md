@@ -9,4 +9,4 @@ lang: de
 fontsize: 13pt
 ...
 
-# Entwurfsmuster Proxy - eine Einführung
+# Das Entwurfsmuster: Proxy

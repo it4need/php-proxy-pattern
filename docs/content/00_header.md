@@ -6,4 +6,4 @@ subject: "Design Patterns - Proxy"
 lang: de
 ...
 
-# Das Entwurfsmuster Proxy
+# Entwurfsmuster Proxy - eine Einführung

@@ -1,87 +1,80 @@
 <!DOCTYPE html>
 <html lang="de">
-<head>
+  <head>
     <meta charset='utf-8'>
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="author" content="Jan André Schlösser">
-    <meta name="description"
-          content="Proxy ist ein GoF-Strukturmuster und stellt ein Stellvertreter-Objekt oder Platzhalter (Proxy) für ein anderes Objekt zur Verfügung. Es bietet dadurch Kontrolle über die Objekterzeugung und dessen Zugriff.">
+    <meta name="description" content="Proxy ist ein GoF-Strukturmuster und stellt ein Stellvertreter-Objekt oder Platzhalter (Proxy) für ein anderes Objekt zur Verfügung. Es bietet dadurch Kontrolle über die Objekterzeugung und dessen Zugriff.">
     <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" type="text/css" href="assets/stylesheets/stylesheet.css" media="screen"/>
-    <link rel="stylesheet" type="text/css" href="assets/stylesheets/print.css" media="print"/>
-    <link rel="stylesheet" type="text/css" href="assets/stylesheets/highlight.css" media="screen"/>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css"
-          integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="assets/stylesheets/stylesheet.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="assets/stylesheets/print.css" media="print" />
+    <link rel="stylesheet" type="text/css" href="assets/stylesheets/highlight.css" media="screen" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
     <script src="assets/javascripts/highlight.pack.js"></script>
-    <script src="https://code.jquery.com/jquery-3.3.1.js"
-            integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
     <script>hljs.initHighlightingOnLoad();</script>
 
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
 
-    <title>Entwurfsmuster-Seminar: Proxy</title>
-    <!-- anything you put here will go verbatim in the header section
-         Useful for adding javascripts, custom metadata, and so on... -->
-</head>
+    <title>Proxy Entwurfsmuster</title>
+  </head>
 
-<body>
-<header>
-    <div class="inner">
+  <body>
+    <header>
+      <div class="inner">
         <h1>Proxy Pattern</h1>
         <h2>Ein Einblick in die Welt des Proxies in PHP</h2>
-        <a href="https://github.com/it4need/php-proxy-pattern" class="button">
-            <small>Projekt ansehen auf</small>
-            GitHub</a>
-    </div>
-</header>
+        <a href="https://github.com/it4need/php-proxy-pattern" class="button"><small>Projekt ansehen auf</small> GitHub</a>
+      </div>
+    </header>
 
-<div id="content-wrapper">
-    <div class="inner clearfix">
+    <div id="content-wrapper">
+      <div class="inner clearfix">
         <section id="main-content">
 
-            <!-- anything you put here will go before the opening <body> tag
-                 (ie: before the README’s contents) Markdown will become HTML  -->
-            <h1 id="das-entwurfsmuster-proxy">Das Entwurfsmuster Proxy</h1>
-            <h2 id="faiconcrosshairs-absicht">\faicon{crosshairs} Absicht</h2>
-            <p>Proxy ist ein <strong><a href="https://de.wikipedia.org/wiki/Entwurfsmuster_(Buch)">GoF</a>-Strukturmuster</strong>
-                und stellt ein Stellvertreter-Objekt oder Platzhalter (Proxy) für ein anderes Objekt zur Verfügung. Es
-                bietet dadurch Kontrolle über die Objekterzeugung und dessen Zugriff.</p>
-            <h2 id="faiconthumbs-up-motivation">\faicon{thumbs-up} Motivation</h2>
-            <p>Ein sehr simples Beispiel, warum man den Zugriff zu einem Objekt kontrollieren möchte, ist ein virtueller
-                Proxy zum verzögerten Nachladen eines Bildes (Lazy Loading). Es ist nicht immer notwendig, dass wir das
-                Bild bereits beim Instanzzieren des Objekts in den Speicher laden. Nehmen wir an, dass das Bild auf
-                einer Website im unteren Bereich angezeigt werden soll (below the fold). Beim Laden der Website ist es
-                nicht notwendig, bereits alle Bilder auf der Website zu laden - es reicht vollkommen aus, diese Bilder
-                zu laden, welche im sichtbaren Bereich der Website sind. Die folgende Abbildung zeigt das Lazy-Loading
-                anhand einer kürzlich verwendeten horizontalen Scrollbar.</p>
-            <p><img src="../assets/images/lazyloading.jpg"
-                    alt="Beispiel des Lazy-Loading anhang einer vertikalen Scrollbar"/></p>
-            <!-- anything you put here will go before the closing </body> tag
-                 (ie: after the README’s contents) Markdown will become HTML  -->
-            <hr/>
+<h1 id="entwurfsmuster-proxy---eine-einfuhrung">Entwurfsmuster Proxy - eine Einführung</h1>
+<h2 id="faiconcrosshairs-absicht">\faicon{crosshairs} Absicht</h2>
+<p>Das Proxy-Entwurfsmuster ist ein <strong><a href="https://de.wikipedia.org/wiki/Entwurfsmuster_(Buch)">GoF</a>-Strukturmuster</strong> und stellt dir ein Stellvertreter-Objekt oder Platzhalter (<em>Proxy</em>) für ein anderes Objekt (<em>Subjekt</em>) zur Verfügung. Es bietet dir dadurch Kontrolle über die Objekterzeugung des Subjekts und dessen Zugriff darauf.</p>
+<h2 id="faiconthumbs-up-motivation">\faicon{thumbs-up} Motivation</h2>
+<h3 id="langweilig---die-erste-sicherer-browser-dank-zugriffsproxy">Langweilig - die Erste: Sicherer Browser dank Zugriffsproxy</h3>
+<p>Stell dir mal vor, dass Du einen sicheren Browser entwickeln möchtest, welcher aus Kostengründen allerdings z.B. bereits vorhandene Browser-Schnittstellen im Hintergrund verwenden soll. Damit die Nutzer deines Browsers vor Datendiebstahl geschützt sind, soll dein Browser nur sichere HTTPS-Verbindungen erlauben und alle unsicheren HTTP-Verbindungen blockieren. Da der Quelltext deiner Engine allerdings nicht verändert werden kann/darf (z.B. aus Lizenzgründen), kannst Du die Zugriffsbeschränkung auf HTTPS nicht einfach so in das Ursprungsobjekt einfügen. Jetzt kommt dein <em>Zugriffsproxy</em> ins Spiel: Er kontrolliert den Zugriff auf den relevanten Teil der Browser-Schnittstelle (hier das Subjekt) und delegiert alle weiteren Methodenaufrufe direkt an das Subjekt weiter. Somit muss der Quelltext deiner geplanten Engine nicht verändert werden und alle sind glücklich!</p>
+<h3 id="motiviert---die-zweite-lazy-loading-mit-virtuellem-proxy">Motiviert - die Zweite: Lazy Loading mit virtuellem Proxy</h3>
+<p>Ein weiteres sehr simples Beispiel, warum Du den Zugriff zu einem Objekt kontrollieren möchtest, ist ein <em>virtueller Proxy</em> zum verzögerten Laden eines Bildes (Lazy Loading). Es ist nämlich nicht immer notwendig, dass ein Bild bereits beim Instanzzieren eines Objekts in den Speicher geladen werden muss.</p>
+<p>Stell dir vor, dass Du ganz viele Bilder auf deiner Werbe-Website deines sicheren Browsers hast. Da viele dieser Bilder im unteren unsichtbaren Bereich (“below the fold”) sind, ist es beim Laden der Website nicht sinnvoll, noch nicht sichtbare Bilder deiner Website zu laden - es reicht also, dass nur diese Bilder geladen werden, die aktuell tatsächlich im sichtbaren Bereich der Website sind. Die folgende Abbildung zeigt das Lazy-Loading anhand einer kürzlich benutzten horizontalen Scrollbalken:</p>
+<p><img src="../assets/images/lazyloading.jpg" alt="Beispiel des Lazy-Loading anhang einer vertikalen Scrollbar" /></p>
+<p>Das Laden des realen Bildes (also das Subjekt) wird also in diesem Beispiel durch einen Stellvertreter vertreten (Proxy) und der Zugriff auf das tatsächliche Objekt wird soweit verzögert, bis er wirklich erst notwendig ist.</p>
+<h3 id="hochmotiviert---die-dritte-reporting-der-downloads-dank-remote-proxy">Hochmotiviert - die Dritte: Reporting der Downloads dank Remote-Proxy</h3>
+<p>Da du natürlich am Ende des Tages wissen möchtest, ob dein sicherer Browser von den Nutzer tatsächlich heruntergeladen wird, hast du dir bei der Planung der Website bereits einige Download-Statistiken überlegt:</p>
+<ul>
+<li>
+Datum
+</li>
+<li>
+Uhrzeit (in Stunden)
+</li>
+<li>
+Endgerätetyp
+</li>
+</ul>
+<p>Diese Statistiken werden über die Downloads über deine Website generiert. Da du den Browser aber noch zusätzlich auf Download-Portalen anbietest, musst du diese Zahlen natürlich ebenfalls in deine Statistik miteinbeziehen. Alle Download-Portale bieten dir API-Schnittstellen an, welche ebenfalls die oben genannten Daten liefern. Mithilfe des Proxy-Objekts kannst du nun in die ursprüngliche Zugriffkontrolle des Statistik-Objekts eingreifen und z.B. die Eigenschaften des Objekts auf die von der jeweiligen API-Schnittstelle zur Verfügung gestellten Daten setzen. Weitere Methoden vom Proxies werden dann einfach an das eigentliche Reportobjekt (unserem Subjekt) delegiert.</p>
 
-            <br/><br/>
-            <p class="repo-owner">
-                <small>Das <a href="https://github.com/jasonlong/architect-theme">architect-theme</a> ist ein Produkt
-                    von <a href="https://github.com/jasonlong">jasonlong</a>.
-                </small>
-            </p>
+        <br /><br /><p class="repo-owner"><small>Das <a href="https://github.com/jasonlong/architect-theme">architect-theme</a> ist ein Produkt von <a href="https://github.com/jasonlong">jasonlong</a>.</small></p>
         </section>
         <aside id="sidebar">
-            <a href="https://github.com/it4need/php-proxy-pattern/archive/master.zip" class="button">
-                <small>Projekt-Download</small>
-                .zip
-            </a>
-            <a href="https://github.com/it4need/php-proxy-pattern/archive/master.tar.gz" class="button">
-                <small>Projekt-Download</small>
-                .tar.gz
-            </a>
+          <a href="https://github.com/it4need/php-proxy-pattern/archive/master.zip" class="button">
+            <small>Projekt-Download</small>
+            .zip
+           </a>
+          <a href="https://github.com/it4need/php-proxy-pattern/archive/master.tar.gz" class="button">
+            <small>Projekt-Download</small>
+            .tar.gz
+          </a>
         </aside>
+      </div>
     </div>
-</div>
-<script src="assets/javascripts/custom.js"></script>
-</body>
+    <script src="assets/javascripts/custom.js"></script>
+  </body>
 </html>

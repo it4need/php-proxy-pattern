@@ -1,21 +1,21 @@
 ## \faicon{thumbs-up} Motivation
 
 ### Langweilig - die Erste: Sicherer Browser dank Zugriffsproxy
-Stell dir mal vor, dass Du einen sicheren Browser entwickeln möchtest, welcher aus Kostengründen allerdings z.B. bereits
+Stell dir mal vor, dass du einen sicheren Browser entwickeln möchtest, welcher aus Kostengründen allerdings z.B. bereits
 vorhandene Browser-Schnittstellen im Hintergrund verwenden soll. Damit die Nutzer deines Browsers vor Datendiebstahl 
 geschützt sind, soll dein Browser nur sichere HTTPS-Verbindungen erlauben und alle unsicheren HTTP-Verbindungen 
 blockieren. Da der Quelltext deiner Engine allerdings nicht verändert werden kann/darf (z.B. aus Lizenzgründen), 
-kannst Du die Zugriffsbeschränkung auf HTTPS nicht einfach so in das Ursprungsobjekt einfügen. Jetzt kommt dein 
+kannst du die Zugriffsbeschränkung auf HTTPS nicht einfach so in das Ursprungsobjekt einfügen. Jetzt kommt dein 
 _Zugriffsproxy_ ins Spiel: Er kontrolliert den Zugriff auf den relevanten Teil der Browser-Schnittstelle (hier das Subjekt)
 und delegiert alle weiteren Methodenaufrufe direkt an das Subjekt weiter. Somit muss der Quelltext deiner geplanten 
 Engine nicht verändert werden und alle sind glücklich!
 
 ### Motiviert - die Zweite: Lazy Loading mit virtuellem Proxy
-Ein weiteres sehr simples Beispiel, warum Du den Zugriff zu einem Objekt kontrollieren möchtest, ist ein _virtueller Proxy_ zum
+Ein weiteres sehr simples Beispiel, warum du den Zugriff zu einem Objekt kontrollieren möchtest, ist ein _virtueller Proxy_ zum
 verzögerten Laden eines Bildes (Lazy Loading). Es ist nämlich nicht immer notwendig, dass ein Bild bereits beim
 Instanzzieren eines Objekts in den Speicher geladen werden muss. 
 
-Stell dir vor, dass Du ganz viele Bilder auf deiner Werbe-Website deines sicheren Browsers hast. Da viele dieser Bilder 
+Stell dir vor, dass du ganz viele Bilder auf deiner Werbe-Website deines sicheren Browsers hast. Da viele dieser Bilder 
 im unteren unsichtbaren Bereich ("below the fold") sind, ist es beim Laden der Website nicht sinnvoll, noch nicht sichtbare Bilder
 deiner Website zu laden - es reicht also, dass nur diese Bilder geladen werden, die aktuell tatsächlich im sichtbaren 
 Bereich der Website sind. Die folgende Abbildung zeigt das Lazy-Loading anhand einer kürzlich benutzten

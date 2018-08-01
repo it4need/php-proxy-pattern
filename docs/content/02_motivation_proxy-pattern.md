@@ -1,4 +1,4 @@
-## \faicon{thumbs-up} Motivation
+## \faicon{thumbs-up} \hspace{.1cm} Motivation
 
 ### Langweilig - die Erste: Sicherer Browser dank Zugriffsproxy
 Stell dir mal vor, dass du einen sicheren Browser entwickeln möchtest, welcher aus Kostengründen allerdings z.B. bereits

@@ -13,8 +13,7 @@ echo "3. Adding pdf to git"
 cd ..
 git add output/proxy-pattern.pdf
 echo "4. Running pandoc on combined.md for creating html docs"
-pandoc  --no-highlight \
-        --lua-filter="$CURRENT_PWD"/src/task-list_architect.lua \
+pandoc  --lua-filter="$CURRENT_PWD"/src/task-list_architect.lua \
         --from       markdown_mmd+smart+yaml_metadata_block+auto_identifiers+link_attributes+implicit_figures \
         --to         html5 \
         --template   "$CURRENT_PWD"/src/architect.template \

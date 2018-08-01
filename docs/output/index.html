@@ -35,19 +35,45 @@
       <div class="inner clearfix">
         <section id="main-content">
 
-<h1 id="entwurfsmuster-proxy---eine-einfuhrung">Entwurfsmuster Proxy - eine Einführung</h1>
-<h2 id="faiconcrosshairs-absicht">\faicon{crosshairs} Absicht</h2>
-<p>Das Proxy-Entwurfsmuster ist ein <strong><a href="https://de.wikipedia.org/wiki/Entwurfsmuster_(Buch)">GoF</a>-Strukturmuster</strong> und stellt dir ein Stellvertreter-Objekt oder Platzhalter (<em>Proxy</em>) für ein anderes Objekt (<em>Subjekt</em>) zur Verfügung. Es bietet dir dadurch Kontrolle über die Objekterzeugung des Subjekts und dessen Zugriff darauf.</p>
-<h2 id="faiconthumbs-up-motivation">\faicon{thumbs-up} Motivation</h2>
+            <h1 id="das-entwurfsmuster-proxy">Das Entwurfsmuster: Proxy</h1>
+            <p>Das Proxy-Entwurfsmuster ist ein <strong><a href="https://de.wikipedia.org/wiki/Entwurfsmuster_(Buch)">GoF</a>-Strukturmuster</strong>
+                und stellt dir ein Stellvertreter-Objekt oder Platzhalter (<em>Proxy</em>) für ein anderes Objekt (<em>Subjekt</em>)
+                zur Verfügung.</p>
+            <h2 id="faiconcrosshairs-hspace.1cm-absicht">\faicon{crosshairs} \hspace{.1cm} Absicht</h2>
+            <p>Das Proxy-Muster bietet dir Kontrolle über die Objekterzeugung des Subjekts und dessen Zugriff
+                darauf.</p>
+            <h2 id="faiconthumbs-up-hspace.1cm-motivation">\faicon{thumbs-up} \hspace{.1cm} Motivation</h2>
 <h3 id="langweilig---die-erste-sicherer-browser-dank-zugriffsproxy">Langweilig - die Erste: Sicherer Browser dank Zugriffsproxy</h3>
-<p>Stell dir mal vor, dass Du einen sicheren Browser entwickeln möchtest, welcher aus Kostengründen allerdings z.B. bereits vorhandene Browser-Schnittstellen im Hintergrund verwenden soll. Damit die Nutzer deines Browsers vor Datendiebstahl geschützt sind, soll dein Browser nur sichere HTTPS-Verbindungen erlauben und alle unsicheren HTTP-Verbindungen blockieren. Da der Quelltext deiner Engine allerdings nicht verändert werden kann/darf (z.B. aus Lizenzgründen), kannst Du die Zugriffsbeschränkung auf HTTPS nicht einfach so in das Ursprungsobjekt einfügen. Jetzt kommt dein <em>Zugriffsproxy</em> ins Spiel: Er kontrolliert den Zugriff auf den relevanten Teil der Browser-Schnittstelle (hier das Subjekt) und delegiert alle weiteren Methodenaufrufe direkt an das Subjekt weiter. Somit muss der Quelltext deiner geplanten Engine nicht verändert werden und alle sind glücklich!</p>
-<h3 id="motiviert---die-zweite-lazy-loading-mit-virtuellem-proxy">Motiviert - die Zweite: Lazy Loading mit virtuellem Proxy</h3>
-<p>Ein weiteres sehr simples Beispiel, warum Du den Zugriff zu einem Objekt kontrollieren möchtest, ist ein <em>virtueller Proxy</em> zum verzögerten Laden eines Bildes (Lazy Loading). Es ist nämlich nicht immer notwendig, dass ein Bild bereits beim Instanzzieren eines Objekts in den Speicher geladen werden muss.</p>
-<p>Stell dir vor, dass Du ganz viele Bilder auf deiner Werbe-Website deines sicheren Browsers hast. Da viele dieser Bilder im unteren unsichtbaren Bereich (“below the fold”) sind, ist es beim Laden der Website nicht sinnvoll, noch nicht sichtbare Bilder deiner Website zu laden - es reicht also, dass nur diese Bilder geladen werden, die aktuell tatsächlich im sichtbaren Bereich der Website sind. Die folgende Abbildung zeigt das Lazy-Loading anhand einer kürzlich benutzten horizontalen Scrollbalken:</p>
-<p><img src="../assets/images/lazyloading.jpg" alt="Beispiel des Lazy-Loading anhang einer vertikalen Scrollbar" /></p>
+            <p>Stell dir mal vor, dass du einen sicheren Browser entwickeln möchtest, welcher aus Kostengründen
+                allerdings z. B. bereits vorhandene Browserschnittstellen im Hintergrund verwenden soll. Damit die
+                Nutzer deines Browsers vor Datendiebstahl geschützt sind, soll dein Browser nur sichere
+                HTTPS-Verbindungen erlauben und alle unsicheren HTTP-Verbindungen blockieren. Da der Quelltext deiner
+                Engine allerdings nicht verändert werden kann/darf (z. B. aus Lizenzgründen), kannst du die
+                Zugriffsbeschränkung auf HTTPS nicht einfach so in das Ursprungsobjekt einfügen. Jetzt kommt dein <em>Zugriffsproxy</em>
+                ins Spiel: Er kontrolliert den Zugriff auf den relevanten Teil der Browserschnittstelle (hier das
+                Subjekt) und delegiert alle weiteren Methodenaufrufe direkt an das Subjekt weiter. Somit muss der
+                Quelltext deiner geplanten Engine nicht verändert werden und alle sind glücklich!</p>
+            <h3 id="motiviert---die-zweite-lazy-loading-mit-virtuellem-proxy">Motiviert - die Zweite: Lazy-Loading mit
+                virtuellem Proxy</h3>
+            <p>Ein weiteres sehr simples Beispiel, warum du den Zugriff zu einem Objekt kontrollieren möchtest, ist ein
+                <em>virtueller Proxy</em> zum verzögerten Laden eines Bildes (Lazy Loading). Es ist nämlich nicht immer
+                notwendig, dass ein Bild bereits beim Instanzzieren eines Objekts in den Speicher geladen werden muss.
+            </p>
+            <p>Stell dir vor, dass du ganz viele Bilder auf deiner Werbe-Website deines sicheren Browsers hast. Da viele
+                dieser Bilder im unteren unsichtbaren Bereich (“below the fold”) sind, ist es beim Laden der Website
+                nicht sinnvoll, noch nicht sichtbare Bilder deiner Website zu laden - es reicht also, dass nur diese
+                Bilder geladen werden, die aktuell tatsächlich im sichtbaren Bereich der Website sind. Die folgende
+                Abbildung zeigt das Lazy-Loading anhand einer kürzlich benutzten horizontalen Scrollbalken:</p>
+            <figure>
+                <img src="../assets/images/lazyloading.jpg"
+                     alt="Beispiel des Lazy-Loading anhang einer vertikalen Scrollbar"/>
+                <figcaption>Beispiel des Lazy-Loading anhang einer vertikalen Scrollbar</figcaption>
+            </figure>
 <p>Das Laden des realen Bildes (also das Subjekt) wird also in diesem Beispiel durch einen Stellvertreter vertreten (Proxy) und der Zugriff auf das tatsächliche Objekt wird soweit verzögert, bis er wirklich erst notwendig ist.</p>
 <h3 id="hochmotiviert---die-dritte-reporting-der-downloads-dank-remote-proxy">Hochmotiviert - die Dritte: Reporting der Downloads dank Remote-Proxy</h3>
-<p>Da du natürlich am Ende des Tages wissen möchtest, ob dein sicherer Browser von den Nutzer tatsächlich heruntergeladen wird, hast du dir bei der Planung der Website bereits einige Download-Statistiken überlegt:</p>
+            <p>Da du natürlich am Ende des Tages wissen möchtest, ob dein sicherer Browser von den Nutzern tatsächlich
+                heruntergeladen wird, hast du dir bei der Planung der Website bereits einige Download-Statistiken
+                überlegt:</p>
 <ul>
 <li>
 Datum
@@ -59,7 +85,130 @@ Uhrzeit (in Stunden)
 Endgerätetyp
 </li>
 </ul>
-<p>Diese Statistiken werden über die Downloads über deine Website generiert. Da du den Browser aber noch zusätzlich auf Download-Portalen anbietest, musst du diese Zahlen natürlich ebenfalls in deine Statistik miteinbeziehen. Alle Download-Portale bieten dir API-Schnittstellen an, welche ebenfalls die oben genannten Daten liefern. Mithilfe des Proxy-Objekts kannst du nun in die ursprüngliche Zugriffkontrolle des Statistik-Objekts eingreifen und z.B. die Eigenschaften des Objekts auf die von der jeweiligen API-Schnittstelle zur Verfügung gestellten Daten setzen. Weitere Methoden vom Proxies werden dann einfach an das eigentliche Reportobjekt (unserem Subjekt) delegiert.</p>
+            <p>Diese Statistiken werden über die Downloads über deine Website generiert. Da du den Browser aber noch
+                zusätzlich auf Download-Portalen anbietest, musst du diese Zahlen natürlich ebenfalls in deine Statistik
+                miteinbeziehen. Alle Download-Portale bieten dir API-Schnittstellen an, welche ebenfalls die oben
+                genannten Daten liefern. Mithilfe des Proxy-Objekts kannst du nun in die ursprüngliche Zugriffkontrolle
+                des Statistik-Objekts eingreifen und z. B. die Eigenschaften des Objekts auf die von der jeweiligen
+                API-Schnittstelle zur Verfügung gestellten Daten setzen. Weitere Methoden vom Proxies werden dann
+                einfach an das eigentliche Reportobjekt (unserem Subjekt) delegiert.</p>
+            <h2 id="faiconsitemap-hspace.1cm-struktur-sequenzdiagram">\faicon{sitemap} \hspace{.1cm} Struktur &amp;
+                Sequenzdiagram</h2>
+            <p><img src="../assets/images/proxy_class_diagram.png" alt="Klassendiagram des Proxy-Musters"
+                    class="float-left" style="width:60.0%"/> <img src="../assets/images/proxy_sequence_diagram.png"
+                                                                  alt="Sequenzdiagram des Proxy-Musters"
+                                                                  style="width:40.0%"/></p>
+            <ul>
+                <li>
+                    <strong>ISubject</strong> definiert das Interface für das Subjekt und den Proxy
+                </li>
+                <li>
+                    <strong>Subject</strong> ist die Klasse, welche die eigentliche Logik implementiert
+                </li>
+                <li>
+                    <strong>Proxy</strong> beinhaltet eine Eigenschaft, die eine Referenz zum Subjekt speichert.
+                    Methodenaufrufe werden in der Regel anschließend an das Subjekt delegiert.
+                </li>
+                <li>
+                    <strong>Client</strong> ruft Methodenaufrufe über das definierte ISubject auf, sodass das <a
+                        href="https://de.wikipedia.org/wiki/Liskovsches_Substitutionsprinzip">Liskovsche
+                    Substitutionsprinzip (LSP)</a> erfüllt bleibt. Er kann also mit beiden Klassen gleichweise
+                    kommunizieren.
+                </li>
+            </ul>
+            <h2 id="faiconbullhorn-hspace.1cm-verwendbarkeit">\faicon{bullhorn} \hspace{.1cm} Verwendbarkeit</h2>
+            <p>Proxies werden häufig in Situationen verwendet, in welcher anstelle eines normalen Zeigers eine
+                komplexere Referenz auf ein Objekt notwendig ist. Es wird dabei meistens unter folgende Arten von
+                Proxies unterschieden:</p>
+            <ul>
+                <li>
+                    <strong>Virtual Proxies</strong> verzögern die Instanziierung eines Objekts (Lazy Loading)
+                </li>
+                <li>
+                    <strong>Remote Proxies</strong> kontrollieren den Zugriff auf ein entferntes Objekt
+                </li>
+                <li>
+                    <strong>Protection Proxies</strong> ermöglichen eine Zugriffskontrolle auf das Subjekt
+                </li>
+                <li>
+                    <strong>Cache Proxies</strong> ermöglichen die Zwischenspeicherung zur schnelleren Auslieferung an
+                    den Client
+                </li>
+                <li>
+                    <strong>Logging Proxies</strong> ermöglichen das Protokollieren eines Aufrufs, bevor dieser an das
+                    Subjekt delegiert wird.
+                </li>
+            </ul>
+            <p>Es existieren noch einige weitere Arten des Proxy-Pattern, welche allerdings seltener verwendet
+                werden.</p>
+            <h2 id="faiconamerican-sign-language-interpreting-hspace.1cm-in-der-realen-welt">
+                \faicon{american-sign-language-interpreting} \hspace{.1cm} In der realen Welt</h2>
+            <p>Auch in der realen Welt verwenden wir regelmäßig die Prinzipien von Proxies. Nehmen wir mal an, du
+                möchtest beim Aldi nebenan deinen wöchentlichen Einkauf mit deiner Kreditkarte/Girocard bezahlen. Dabei
+                ist deine Karte sozusagen der Proxy für dein Bankkonto. Deine Kreditkarte erlaubt dem Ladeninhaber das
+                Gelf für die Ware zu erhalten, ohne das er direkten Zugriff auf dein gesamtes Bankkonto erhält.</p>
+            <h2 id="faiconcode-hspace.1cm-proxy-programmierbeispiele-in-php">\faicon{code} \hspace{.1cm}
+                Proxy-Programmierbeispiele in PHP</h2>
+            <div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><a
+                    class="sourceLine" id="cb1-1" data-line-number="1"><span class="bu">cd</span> ~/Sites/</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="fu">git</span> clone https://github.com/it4need/php-proxy-pattern</a></code></pre>
+            </div>
+            <p>Damit du das Proxy-Pattern von Grund auf verstehst, gibt es im <a
+                    href="https://github.com/it4need/php-proxy-pattern">Repository</a> einige Beispiele in PHP zu den
+                jeweiligen Proxy-Varianten. Du findest im Repository ebenfalls Unit-Tests, damit du den Sinn von den
+                einzelnen Proxies verstehst. Die Tests sind gleichzeitig deine Dokumentation für die Anwendung des
+                Musters.</p>
+            <h2 id="faiconthumbs-up-hspace.1cm-vorteile">\faicon{thumbs-up} \hspace{.1cm} Vorteile</h2>
+            <ul>
+                <li>
+                    Proxies können den Zugang zu Objekten kontrollieren, bevor sie die Methodenaufrufe an das Subjekt
+                    delegieren
+                </li>
+                <li>
+                    Der Client bemerkt die Kontrolle des Objekts nicht
+                </li>
+                <li>
+                    Proxies funktionieren ebenfalls, wenn das eigentliche Objekt noch nicht im Speicher verfügbar ist
+                    (z.B. Lazy Loading)
+                </li>
+                <li>
+                    Proxies können helfen, die Geschwindigkeit der Applikation zu steigern (z.B. Caching)
+                </li>
+                <li>
+                    Proxies können die Interprozesskommunikation/Fernkommunikation zwischen Objekten ermöglichen
+                </li>
+            </ul>
+            <h2 id="faiconthumbs-down-hspace.1cm-nachteile">\faicon{thumbs-down} \hspace{.1cm} Nachteile</h2>
+            <ul>
+                <li>
+                    Proxies können je nach Implementierung die Antwortzeit verzögern
+                </li>
+                <li>
+                    Proxies fügen eine weitere Abstraktionsschicht ein, welche zu Umwegen führen kann und die
+                    Komplexität steigert
+                </li>
+                <li>
+                    Es müssen alle von der Schnittstelle definierten Methoden für das Proxy erstellt und an das Subjekt
+                    delegiert werden
+                </li>
+            </ul>
+            <h2 id="faiconbezier-curve-hspace.1cm-beziehungen-zu-anderen-entwurfsmuster">\faicon{bezier-curve}
+                \hspace{.1cm} Beziehungen zu anderen Entwurfsmuster</h2>
+            <ul>
+                <li>
+                    Das <a href="https://de.wikipedia.org/wiki/Decorator"><em>Decorator</em>-Entwurfsmuster</a> sieht
+                    ähnlich aus, hat allerdings ein anderes Ziel: Er fügt zusätzliches Verhalten hinzu.
+                </li>
+                <li>
+                    Das <a href="https://de.wikipedia.org/wiki/Fassade_(Entwurfsmuster)"><em>Facade</em>-Pattern</a>
+                    kontrolliert nicht den Zugriff auf das Objekt; es stellt eine andere Schnittstelle bereit
+                </li>
+                <li>
+                    Das <a href="https://de.wikipedia.org/wiki/Adapter_(Entwurfsmuster)"><em>Adapter</em>-Pattern</a>
+                    verändert im Gegensatz zum Proxy-Entwurfsmuster die Schnittstellendefinition, aber nicht die
+                    Geschäftslogik (sinnbildmäßiger Stromadapter).
+                </li>
+            </ul>
 
         <br /><br /><p class="repo-owner"><small>Das <a href="https://github.com/jasonlong/architect-theme">architect-theme</a> ist ein Produkt von <a href="https://github.com/jasonlong">jasonlong</a>.</small></p>
         </section>
